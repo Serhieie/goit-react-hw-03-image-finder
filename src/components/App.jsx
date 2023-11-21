@@ -89,6 +89,7 @@ export class App extends Component {
       if (!images.hits.length) {
         this.setState({
           isLoading: false,
+          page: null,
         });
         return toastCallEmpty();
       }
@@ -107,17 +108,26 @@ export class App extends Component {
   //Fetching images by pressing load more button
   loadMoreImages = async () => {
     const { page, searchValue, pagination } = this.state;
-    this.setState(prevState => ({
-      isLoading: true,
-      page: prevState.page + 1,
-    }));
+    this.setState({ isLoading: true });
+
     try {
       const images = await API.getImgs(searchValue, page + 1, pagination);
-      this.setState(prevState => ({
-        images: [...prevState.images, ...images.hits],
-        isLoading: false,
-      }));
-      succesToastCall();
+      const updatedImages = [...this.state.images, ...images.hits];
+
+      if (!images.hits.length) {
+        this.setState({
+          isLoading: false,
+          page: null,
+        });
+        toastCallEmpty();
+      } else {
+        this.setState({
+          images: updatedImages,
+          isLoading: false,
+          page: page + 1,
+        });
+        succesToastCall();
+      }
     } catch (error) {
       this.setState({ error: true, isLoading: false });
       toastCallOutOfRange();

@@ -16,6 +16,7 @@ export class ImageGalleryItem extends Component {
     this.scrollBlock();
   };
 
+  //Imitation of zoom in open modal
   toggleZoom = evt => {
     const { isZoomed } = this.state;
     this.setState(prevState => ({
