@@ -144,7 +144,7 @@ export class App extends Component {
 
         {/* Showing loader when loading in state */}
         {isLoading ? (
-          <div className="fixed top-0 left-0 w-full h-full bg-slate-900 bg-opacity-20 flex justify-center items-center z-30">
+          <div className="fixed top-0 left-0 w-full h-full bg-slate-900 bg-opacity-40 flex justify-center items-center z-30">
             <Loader />
           </div>
         ) : (
