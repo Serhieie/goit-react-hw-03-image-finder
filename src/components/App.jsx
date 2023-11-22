@@ -23,8 +23,6 @@ export class App extends Component {
     heightToMinus: 120,
   };
 
-  bottomRef = React.createRef();
-
   //Call scrollBottom function after images loaded by pressing load more button
   componentDidUpdate(prevProps, prevState) {
     if (prevState.images !== this.state.images) {
@@ -140,7 +138,7 @@ export class App extends Component {
       <>
         <SearchBar onSearch={this.fetchImages} />
         <ToastContainer />
-        <ImageGalery ref={this.imageGaleryRef} images={images} />
+        <ImageGalery images={images} />
 
         {/* Showing loader when loading in state */}
         {isLoading ? (
@@ -153,7 +151,6 @@ export class App extends Component {
             <LoadMoreButton onClick={this.loadMoreImages} error={error} />
           )
         )}
-        <div ref={this.bottomRef}></div>
       </>
     );
   }
